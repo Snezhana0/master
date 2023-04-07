@@ -16,14 +16,13 @@ background: #6699ff;
 position: absolute;
 left: 5%;
 border-radius: 5px;
-} 
+}
 #user-panel{
 position: absolute;
 top: 20px;
 right: 5%;
 padding: 10px;
 background: #9999ff;
-
 border-radius: 5px;
 }
 footer{

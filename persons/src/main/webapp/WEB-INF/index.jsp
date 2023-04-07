@@ -14,9 +14,9 @@ charset="UTF-8">
 <div id="main">
 <h2>Функции системы</h2>
 <ul>
-<li><a href="#">Книга</a>
-<li><a href="#">Автор</a>
-<li><a href="#">Издательство</a>
+<li><a href="#">Книги</a>
+<li><a href="#">Авторы</a>
+<li><a href="#">Издательства</a>
 </ul>
 </div>
 <jsp:include page="jspf/footer.jsp" />

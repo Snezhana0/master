@@ -11,14 +11,14 @@ import jakarta.servlet.Servlet;
 * Servlet implementation class RoleServlet_
 */
 @WebServlet("/HelloRoleServlet")
-public class RoleServlet extends HttpServlet implements Servlet {
+public class PersonsServlet extends HttpServlet implements Servlet {
 
 private static final long serialVersionUID = 1L;
 
  /**
  * @see HttpServlet#HttpServlet()
  */
- public RoleServlet() {
+ public PersonsServlet() {
  super();
  // TODO Auto-generated constructor stub
  }
@@ -48,3 +48,4 @@ HttpServletResponse response) throws ServletException, IOException {
 doGet(request, response);
 }
 }
+
