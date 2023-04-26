@@ -56,9 +56,4 @@ public class Publish {
     this.add = add;
     }
 
-  @Override
-  public String toString() {
-  return "Издательство {" + "Id: " + id + ", Название: " + namepublish  +", Сайт: " + site + ", Адрес: "+ add + "}";
-  }
-
 }

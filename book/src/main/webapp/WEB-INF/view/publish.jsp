@@ -2,15 +2,6 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="domain.Publish"%>
-<%
-Publish p1 = new Publish(1l, "АСТ", "ast.ru", " Москва, Звёздный бульвар,дом 21");
-Publish p2 = new Publish(2l, "Азбука ", "azbooka.ru", " Москва, ул. Краснобогатырская, дом 44");
-Publish p3= new Publish(3l, "Альфа-книга ", " armada.ru", " Москва, ул. Верхняя, дом 34");
-Publish p4 = new Publish(4l, "Noeclassic ", "ast.ru", " Москва, Звёздный бульвар, дом 21");
-Publish[] publishs = new Publish[]{p1, p2, p3, p4};
-int length = publishs.length;
-pageContext.setAttribute("publishs", publishs);
-%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -36,7 +27,7 @@ pageContext.setAttribute("publishs", publishs);
 </tr>
 </thead>
 <tbody>
-<c:forEach var="publish" items="${publishs}">
+<c:forEach var="publish" items="${listPublish}">
 <tr>
 <td>${publish.getId()}</td>
 <td>${publish.getNamePublish()}</td>
@@ -52,11 +43,27 @@ pageContext.setAttribute("publishs", publishs);
 <article>
 <h3>Издательства</h3>
 <div class="text-article">
-<form method="POST" action="">
-<p>
-<label for="namerole">Издательство
-</label> <input type="text" name="namerole" />
-</p>
+<c:if test="${publish == null} ">
+<form method="POST" action="insert">
+</c:if>
+<c:if test="${publish == null}">
+					<input type="hidden" name="id" value="<c:out value='${author.id}' />" />
+				</c:if>
+<fieldset class="form-group">
+					<label>Название</label> <input type="text"
+						value="<c:out value='${publish.namepublish}' />" class="form-control"
+						name="name" required="required">
+				</fieldset>
+<fieldset class="form-group">
+					<label>Сайт</label> <input type="text"
+						value="<c:out value='${publish.site}' />" class="form-control"
+						name="name" required="required">
+				</fieldset>
+<fieldset class="form-group">
+					<label>Адрес</label> <input type="text"
+						value="<c:out value='${publish.add}' />" class="form-control"
+						name="name" required="required">
+				</fieldset>
 </form>
 <p>
 <button type="submit">Добавить</button>

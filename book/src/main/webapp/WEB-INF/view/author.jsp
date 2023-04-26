@@ -2,15 +2,6 @@
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="domain.Author"%>
-<%
-Author a1 = new Author(1l, "Джон Рональд Руэл ", "Толкин");
-Author a2 = new Author(2l, "Сергей ", "Довлатов");
-Author a3= new Author(3l, "Кир ", " Булычёв");
-Author a4 = new Author(4l, "Стефани ", "Майер");
-Author[] authors = new Author[]{a1, a2, a3, a4};
-int length = authors.length;
-pageContext.setAttribute("authors", authors);
-%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -35,7 +26,7 @@ pageContext.setAttribute("authors", authors);
 </tr>
 </thead>
 <tbody>
-<c:forEach var="author" items="${authors}">
+<c:forEach var="author" items="${listUser}">
 <tr>
 <td>${author.getId()}</td>
 <td>${author.getFirstName()}</td>
@@ -50,14 +41,25 @@ pageContext.setAttribute("authors", authors);
 <article>
 <h3>Авторы</h3>
 <div class="text-article">
-<form method="POST" action="">
-<p>
-<label for="namerole">Автор
-</label> <input type="text" name="namerole" />
-</p>
+<c:if test="${auntor == null} ">
+<form method="POST" action="insert">
+</c:if>
+<c:if test="${author == null}">
+					<input type="hidden" name="id" value="<c:out value='${author.id}' />" />
+				</c:if>
+<fieldset class="form-group">
+					<label>Фамилия</label> <input type="text"
+						value="<c:out value='${author.firstname}' />" class="form-control"
+						name="name" required="required">
+				</fieldset>
+<fieldset class="form-group">
+					<label>Имя</label> <input type="text"
+						value="<c:out value='${author.lastname}' />" class="form-control"
+						name="name" required="required">
+				</fieldset>
 </form>
 <p>
-<button type="submit">Добавить</button>
+<button type="submit" class="btn btn-success">Добавить</button>
 </p>
 </div>
 </article>

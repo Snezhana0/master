@@ -41,33 +41,7 @@ public class Book {
    public Book() {
    }
    
-   public Book(String title, String code, String yearpublish,
-       String countpage, String hardcover, String Abstract, String statuc,  Author author, Publish publish) {
-       this.title = title;
-       this.сode = code;
-       this.yearpublish = yearpublish;
-       this.countpage = countpage;
-       this.hardcover = hardcover;
-       this.Abstract = Abstract;
-       this.statuc = statuc;
-       this.author = author;
-       this.publish = publish;
-       }
-   
-   public Book(String title, String code, String yearpublish,
-       String countpage, String hardcover, String Abstract, String statuc,  Author author, Publish publish, Long idAuthor, Long idPublish) {
-       this.title = title;
-       this.сode = code;
-       this.yearpublish = yearpublish;
-       this.countpage = countpage;
-       this.hardcover = hardcover;
-       this.Abstract = Abstract;
-       this.statuc = statuc;
-       this.author = author;
-       this.publish = publish;
-       this.idAuthor = idAuthor;
-       this.idPublish = idPublish;
-       }
+  
    
    public Book(Long id, String title, String code, String yearpublish,
        String countpage, String hardcover, String Abstract, String statuc,  Author author, Publish publish, Long idAuthor, Long idPublish) {
@@ -155,7 +129,7 @@ public class Book {
   public String getAuthor() {
     return author.getLastName();
     }
-  public void setRole(Author author) {
+  public void setAuthor(Author author) {
     this.author = author;
     }
   public Long getIdAuthor() {

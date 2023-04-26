@@ -3,27 +3,7 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="domain.Book"%>
 <%@ page import="domain.Author"%>
-<%@ page import="domain.Publish"%>
-<%
-Author a1 = new Author(1l, "Джон Рональд Руэл ", "Толкин");
-Author a2 = new Author(2l, "Сергей ", "Довлатов");
-Author a3= new Author(3l, "Кир ", " Булычёв");
-Author a4 = new Author(4l, "Стефани ", "Майер");
-Author[] authors = new Author[]{a1, a2, a3, a4};
-pageContext.setAttribute("authors", authors);
-Publish p1 = new Publish(5l, "АСТ", "ast.ru", " Москва, Звёздный бульвар, дом 21");
-Publish p2 = new Publish(6l, "Азбука ", "azbooka.ru", " Москва, ул. Краснобогатырская, дом 44");
-Publish p3= new Publish(7l, "Альфа-книга ", " armada.ru", " Москва, ул. Верхняя, дом 34");
-Publish p4 = new Publish(8l, "Noeclassic ", "ast.ru", " Москва, Звёздный бульвар, дом 21");
-Publish[] publishs = new Publish[]{p1, p2, p3, p4};
-Book b1 = new Book(1l, "Властелин Колец","12", "2021", "1104","Твёрдый","Толкин, фентези, хоббит", "Есть",a1, p1,1l,5l);
-Book b2 = new Book(2l, "Чемодан","13", "2016", "160","Мягкий", "Довлатов, проза, классика", "Есть", a2, p2,2l,6l);
-Book b3= new Book(3l, "Сто лет тому вперёд","21", "2020", "395","Твёрдый", "Проза, фантастика" , "Нет",a3, p3,2l,7l);
-Book b4 = new Book(4l, "Сумерки","31", "2021", "416", "Твёрдый", "Сумерки, вампиры, фэнтези", "Есть", a4, p4,2l,8l);
-Book[] books = new Book[]{b1, b2, b3, b4};
-pageContext.setAttribute("books", books);
-%>
- 
+<%@ page import="domain.Publish"%> 
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -46,7 +26,7 @@ pageContext.setAttribute("books", books);
 <th>Код</th>
 <th>Год издания</th>
 <th>Кол-во страниц</th>
-<th>Тип переплёта</th>
+<th>Переплёт</th>
 <th>Реферат</th>
 <th>Наличие на складе</th>
 <th>Автор</th>
@@ -54,7 +34,7 @@ pageContext.setAttribute("books", books);
 </tr>
 </thead>
 <tbody>
-<c:forEach var="book" items="${books}">
+<c:forEach var="book" items="${listBook}">
 <tr>
 <td>${book.getId()}</td>
 <td>${book.getTitle()}</td>
@@ -108,23 +88,18 @@ pageContext.setAttribute("books", books);
 <label for="author">Автор</label>
 <select>
 <option disabled>Выберите автора</option>
-<c:forEach var="role" items="${authors}">
+<c:forEach var="author" items="${listUser}">
 <option value="${author}">
-${author.getFirstName()}>
-${author.getLastName()}>
+${author.getLastName()}
 </option>
 </c:forEach>
 </select>
-</p>
-<p>
 <label for="publish">Издательство</label>
 <select>
 <option disabled>Выберите издательство</option>
-<c:forEach var="role" items="${publishs}">
+<c:forEach var="publish" items="${listPublish}">
 <option value="${publish}">
-${publish.getNamePublish()}>
-${publish.getSite()}>
-${publish.getAdd()}>
+${publish.getNamePublish()}
 </option>
 </c:forEach>
 </select>
