@@ -53,15 +53,15 @@ margin-top: 3px;
 {
 float: left;
 position: relative;
-width: 650px;
+width: 750px;
 background: #ccccff;
 border-radius: 5px;
 height: 100%;
 }
 #main .leftAside p
 {
-width: 96%;
-margin-left: 2%;
+width: 97%;
+margin-left: 5%;
 text-align: justify;
 }
 
@@ -70,7 +70,7 @@ text-align: justify;
 margin: 0px;
 margin-left: 2%;
 margin-top: 2%;
-width: 96%;
+width: 97%;
 padding: 5px 0px 5px 0px;
 border-radius: 5px 5px 0px 0px; 
 background: #76a5fc;
@@ -79,9 +79,9 @@ text-align: center;
 #main .leftAside table
 {
 margin: 5px;
-margin-left: 2%;
+margin-left: 1%;
 margin-top: 2%;
-margin-bottom: 2%;
+margin-bottom: 5%;
 width: 96%;
 padding: 5px 0px 5px 0px;
 border-radius: 0px 0px 5px 5px; 
@@ -91,7 +91,7 @@ border: 1px solid #333;
 }
 #main article
 {
-margin-left: 660px;
+margin-left: 760px;
 margin-bottom: 5px;
 background: #80abdb;
 border: 1px solid #00ffff;
@@ -110,13 +110,13 @@ text-align: left;
 }
 #main article .text-article
 {
-padding: 5px;
+padding: 10px;
 font-size: 15px;
 background: #cce6fc;
 }
 #main article .text-article lable
 {
-margin-right: 10px;
+margin-right: 20px;
 width: 10px;
 }
 

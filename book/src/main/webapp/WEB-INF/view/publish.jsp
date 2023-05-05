@@ -9,14 +9,14 @@ pageEncoding="UTF-8"%>
 <title>Издательства</title>
 <head>
 <meta charset="UTF-8">
-<title>Publishs</title>
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/jspf/header.jsp" />
 <div id="main">
 <section>
 <aside class="leftAside">
-<h3>Список Издательств</h3>
+<h3>Список издательств</h3>
 <table>
 <thead>
 <tr>
@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
 </tr>
 </thead>
 <tbody>
-<c:forEach var="publish" items="${listPublish}">
+<c:forEach var="publish" items="${publishs}">
 <tr>
 <td>${publish.getId()}</td>
 <td>${publish.getNamePublish()}</td>
@@ -41,33 +41,28 @@ pageEncoding="UTF-8"%>
 </section>
 <section>
 <article>
-<h3>Издательства</h3>
+<h3>Данные издательства</h3>
 <div class="text-article">
-<c:if test="${publish == null} ">
-<form method="POST" action="insert">
-</c:if>
-<c:if test="${publish == null}">
-					<input type="hidden" name="id" value="<c:out value='${author.id}' />" />
-				</c:if>
-<fieldset class="form-group">
-					<label>Название</label> <input type="text"
-						value="<c:out value='${publish.namepublish}' />" class="form-control"
-						name="name" required="required">
-				</fieldset>
-<fieldset class="form-group">
-					<label>Сайт</label> <input type="text"
-						value="<c:out value='${publish.site}' />" class="form-control"
-						name="name" required="required">
-				</fieldset>
-<fieldset class="form-group">
-					<label>Адрес</label> <input type="text"
-						value="<c:out value='${publish.add}' />" class="form-control"
-						name="name" required="required">
-				</fieldset>
-</form>
+<form method="POST" action="">
+<p>
+<label for="id">Id</label>
+<input type="text" name="id" />
+</p><p>
+<label for="namepublish">Название</label>
+<input type="text" name="namepublish" />
+</p>
+<p>
+<label for="site">Сайт</label>
+<input type="text" name="site" />
+</p>
+<p>
+<label for="add">Адрес</label>
+<input type="text" name="add" />
+</p>
 <p>
 <button type="submit">Добавить</button>
 </p>
+</form>
 </div>
 </article>
 </section>

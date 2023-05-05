@@ -2,13 +2,13 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="4.0">
   <servlet>
     <description></description>
-    <display-name>AuthorServlet</display-name>
-    <servlet-name>AuthorServlet</servlet-name>
-    <servlet-class>controller.AuthorServlet</servlet-class>
+    <display-name>HomeServlet</display-name>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>controller.HomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AuthorServlet</servlet-name>
-    <url-pattern>/AuthorServlet</url-pattern>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/HomeServlet</url-pattern>
   </servlet-mapping>
   <display-name>book</display-name>
   <welcome-file-list>
@@ -21,16 +21,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>HomeServlet</display-name>
-    <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>controller.HomeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/HomeServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>BookServlet</display-name>
     <servlet-name>BookServlet</servlet-name>
     <servlet-class>controller.BookServlet</servlet-class>
@@ -41,12 +31,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Publish</display-name>
-    <servlet-name>Publish</servlet-name>
-    <servlet-class>controller.Publish</servlet-class>
+    <display-name>PublishServlet</display-name>
+    <servlet-name>PublishServlet</servlet-name>
+    <servlet-class>controller.PublishServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Publish</servlet-name>
-    <url-pattern>/Publish</url-pattern>
+    <servlet-name>PublishServlet</servlet-name>
+    <url-pattern>/PublishServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AuthorServlet</display-name>
+    <servlet-name>AuthorServlet</servlet-name>
+    <servlet-class>controller.AuthorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthorServlet</servlet-name>
+    <url-pattern>/AuthorServlet</url-pattern>
   </servlet-mapping>
 </web-app>

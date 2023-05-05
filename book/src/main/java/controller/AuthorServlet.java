@@ -1,119 +1,90 @@
 package controller; 
  
-import jakarta.servlet.RequestDispatcher; 
-import jakarta.servlet.ServletContext; 
-import jakarta.servlet.ServletException; 
-import jakarta.servlet.annotation.WebServlet; 
-import jakarta.servlet.http.HttpServlet; 
-import jakarta.servlet.http.HttpServletRequest; 
-import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.FileNotFoundException;
-import java.io.IOException; 
-
-
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-import dao.UserDao;
+import java.util.ArrayList;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import dao.ConnectionProperty;
+
+
 import domain.Author;
 @WebServlet("/authors") 
 public class AuthorServlet extends HttpServlet { 
- 
 	private static final long serialVersionUID = 1L;
-	private UserDao userDAO;
+	ConnectionProperty prop;
+	String select_all_author = "SELECT * FROM authors";
+	String insert_author = "INSERT INTO authors (id, firstname, lastname) VALUES(?,?,?)";
+	ArrayList<Author> author = new ArrayList<Author>();
+	String userPath;
+	 public AuthorServlet() throws FileNotFoundException, IOException {
+	 prop = new ConnectionProperty();
+	 }
+	 
+	protected void doGet(HttpServletRequest request,
+	HttpServletResponse response) 
+	throws ServletException, IOException {
+	response.setContentType("text/html");
+	ConnectionProperty builder = new ConnectionProperty();
+	// Загрузка всех авторов
+	try (Connection conn = builder.getConnection()) {
+	Statement stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery(select_all_author);
+	if(rs != null) {
+	author.clear();
+	while (rs.next()) {
+		author.add(new Author(rs.getLong("id"),
+	rs.getString("firstname"),
+	rs.getString("lastname")));
+	}
+	rs.close();
+	request.setAttribute("author", author);
+	}
+	} catch (Exception e) {
+	System.out.println(e);
+	} 
+	userPath = request.getServletPath();
+	if("/authors".equals(userPath)){
+	request.getRequestDispatcher("/WEB-INF/view/author.jsp")
+	.forward(request, response);
+	}
+	}
 	
-	public void init() {
-		userDAO = new UserDao();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getServletPath();
-
-		try {
-			switch (action) {
+	/**
+	* @see HttpServlet#doPost(HttpServletRequest request, 
+	HttpServletResponse response)
+	*/
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			ConnectionProperty builder = new ConnectionProperty();
+			try (Connection conn = builder.getConnection()){
+			Long id = (long) Integer.parseInt(request.getParameter("id"));
+			String firstname = request.getParameter("firstname");
+			String lastname = request.getParameter("lastname");
+		
+			try (PreparedStatement preparedStatement = 
+			conn.prepareStatement(insert_author)){
+			preparedStatement.setLong(1, id);
+			preparedStatement.setString(2, firstname);
+			preparedStatement.setString(3, lastname);
 			
-			case "/new":
-				showNewForm(request, response);
-				break;
-			case "/insert":
-				insertUser(request, response);
-				break;
-			case "/delete":
-				deleteUser(request, response);
-				break;
-			case "/update":
-				updateUser(request, response);
-				break;
-			default:
-				listUser(request, response);
-				break;
+			int result = preparedStatement.executeUpdate();
+			} catch (Exception e) {
+			System.out.println(e);
 			}
-		} catch (SQLException ex) {
-			throw new ServletException(ex);
-		}
-	}
+			} catch (Exception e) {
+			System.out.println(e);
+			getServletContext().getRequestDispatcher("/WEB-INF/view/author.jsp")
+			.forward(request, response); 
+			}
+			doGet(request, response);
+			}
 
-	private void listUser(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<Author> listUser = userDAO.selectAllUsers();
-		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/author.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/author.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		Author existingUser = userDAO.selectUser(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/author.jsp");
-		request.setAttribute("author", existingUser);
-		dispatcher.forward(request, response);
-
-	}
-
-	private void insertUser(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, IOException {
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
-		
-		Author newUser = new Author(null, firstname, lastname);
-		userDAO.insertUser(newUser);
-		response.sendRedirect("list");
-	}
-
-	private void updateUser(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, IOException {
-		Long id = (long) Integer.parseInt(request.getParameter("id"));
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
-		
-
-		Author book = new Author(id, firstname, lastname);
-		userDAO.updateUser(book);
-		response.sendRedirect("list");
-	}
-
-	private void deleteUser(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		userDAO.deleteUser(id);
-		response.sendRedirect("list");
-
-	}
 }

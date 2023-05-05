@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html"
-pageEncoding="UTF-8"%>
+ pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="domain.Book"%>
 <%@ page import="domain.Author"%>
-<%@ page import="domain.Publish"%> 
+<%@ page import="domain.Publish"%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -11,7 +11,6 @@ pageEncoding="UTF-8"%>
 <title>Книги</title>
 <head>
 <meta charset="UTF-8">
-<title>Books</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/jspf/header.jsp" />
@@ -21,20 +20,21 @@ pageEncoding="UTF-8"%>
 <table>
 <thead>
 <tr>
-<th>Id</th>
+<th>Код</th>
 <th>Название</th>
 <th>Код</th>
-<th>Год издания</th>
+<th>Год публикации</th>
 <th>Кол-во страниц</th>
 <th>Переплёт</th>
 <th>Реферат</th>
-<th>Наличие на складе</th>
+<th>Наличие</th>
 <th>Автор</th>
+
 <th>Издательство</th>
 </tr>
 </thead>
 <tbody>
-<c:forEach var="book" items="${listBook}">
+<c:forEach var="book" items="${books}">
 <tr>
 <td>${book.getId()}</td>
 <td>${book.getTitle()}</td>
@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
 <td>${book.getCountpage()}</td>
 <td>${book.getHardcover()}</td>
 <td>${book.getAbstract()}</td>
+<td>${book.getHardcover()}</td>
 <td>${book.getStatuc()}</td>
 <td>${book.getAuthor()}</td>
 <td>${book.getPublish()}</td>
@@ -57,57 +58,60 @@ pageEncoding="UTF-8"%>
 <div class="text-article">
 <form method="POST" action="">
 <p>
-<label for="lastname">Название</label>
-<input type="text" name="lastname" />
+<label for="id">Id</label>
+<input type="text" name="id" />
 </p>
 <p>
-<label for="firstname">Код</label>
-<input type="text" name="firstname" />
+<label for="title">Название</label>
+<input type="text" name="title" />
 </p>
 <p>
-<label for="phone">Год публикации</label>
-<input type="text" name="phone" />
+<label for="code">Код</label>
+<input type="text" name="code" />
 </p>
 <p>
-<label for="email">Кол-во страниц</label>
-<input type="text" name="email" />
+<p>
+<label for="yearpublish">Год публикации</label>
+<input type="text" name="yearpublish" />
 </p>
 <p>
-<label for="email">Переплёт</label>
-<input type="text" name="email" />
+<label for="countpage">Кол-во страниц </label>
+<input type="text" name="countpage" />
 </p>
 <p>
-<label for="email">Реферат</label>
-<input type="text" name="email" />
+<label for="hardcover">Переплёт</label>
+<input type="text" name="Hardcover" />
 </p>
 <p>
-<label for="email">Наличие</label>
-<input type="text" name="email" />
+<label for="abstract">Реферат</label>
+<input type="text" name="Abstract" />
 </p>
 <p>
-<label for="author">Автор</label>
-<select>
+<label for="statuc">Наличие</label>
+<input type="text" name="Statuc" />
+</p>
+<label for="authorid">Автор</label>
+<select name = "author">
 <option disabled>Выберите автора</option>
-<c:forEach var="author" items="${listUser}">
+<c:forEach var="author" items="${authors}">
 <option value="${author}">
-${author.getLastName()}
+<c:out value="${author.getLastName()}"></c:out>
 </option>
 </c:forEach>
 </select>
-<label for="publish">Издательство</label>
-<select>
+<label for="publishid">Издательство</label>
+<select name = "publish">
 <option disabled>Выберите издательство</option>
-<c:forEach var="publish" items="${listPublish}">
+<c:forEach var="publish" items="${publishs}">
 <option value="${publish}">
-${publish.getNamePublish()}
+<c:out value="${publish.getNamePublish()}"></c:out>
 </option>
 </c:forEach>
 </select>
-</p>
-</form>
 <p>
 <button type="submit">Добавить</button>
 </p>
+</form>
 </div>
 </article>
 </section>

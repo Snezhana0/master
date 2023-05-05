@@ -55,5 +55,10 @@ public class Publish {
   public void setAdd(String add) {
     this.add = add;
     }
+  
+  @Override
+	public String toString() {
+		return "Издательство" + id + namepublish + site + add ;
+	}
 
 }

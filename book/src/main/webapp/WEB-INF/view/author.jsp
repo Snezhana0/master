@@ -9,14 +9,14 @@ pageEncoding="UTF-8"%>
 <title>Авторы</title>
 <head>
 <meta charset="UTF-8">
-<title>Authors</title>
+<title></title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/jspf/header.jsp" />
 <div id="main">
 <section>
 <aside class="leftAside">
-<h3>Список Авторов</h3>
+<h3>Список авторов</h3>
 <table>
 <thead>
 <tr>
@@ -26,11 +26,11 @@ pageEncoding="UTF-8"%>
 </tr>
 </thead>
 <tbody>
-<c:forEach var="author" items="${listUser}">
+<c:forEach var="authors" items="${author}">
 <tr>
-<td>${author.getId()}</td>
-<td>${author.getFirstName()}</td>
-<td>${author.getLastName()}</td>
+<td>${authors.getId()}</td>
+<td>${authors.getFirstName()}</td>
+<td>${authors.getLastName()}</td>
 </tr>
 </c:forEach>
 </tbody>
@@ -39,28 +39,25 @@ pageEncoding="UTF-8"%>
 </section>
 <section>
 <article>
-<h3>Авторы</h3>
+<h3>Данные автора</h3>
 <div class="text-article">
-<c:if test="${auntor == null} ">
-<form method="POST" action="insert">
-</c:if>
-<c:if test="${author == null}">
-					<input type="hidden" name="id" value="<c:out value='${author.id}' />" />
-				</c:if>
-<fieldset class="form-group">
-					<label>Фамилия</label> <input type="text"
-						value="<c:out value='${author.firstname}' />" class="form-control"
-						name="name" required="required">
-				</fieldset>
-<fieldset class="form-group">
-					<label>Имя</label> <input type="text"
-						value="<c:out value='${author.lastname}' />" class="form-control"
-						name="name" required="required">
-				</fieldset>
-</form>
+<form method="POST" action="">
 <p>
-<button type="submit" class="btn btn-success">Добавить</button>
+<label for="id">Id</label>
+<input type="text" name="id" />
 </p>
+<p>
+<label for="firstname">Имя</label>
+<input type="text" name="firstname" />
+</p>
+<p>
+<label for="lastname">Фамилия</label>
+<input type="text" name="lastname" />
+</p>
+<p>
+<button type="submit">Добавить</button>
+</p>
+</form>
 </div>
 </article>
 </section>

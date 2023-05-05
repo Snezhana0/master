@@ -13,89 +13,88 @@ import java.io.IOException;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
-import dao.PublishDao;
+
+import dao.ConnectionProperty;
+import domain.Author;
 import domain.Publish;
 @WebServlet("/publishs") 
 public class PublishServlet extends HttpServlet { 
  
 	private static final long serialVersionUID = 1L;
-	private PublishDao publishDao;
+	ConnectionProperty prop;
+	String select_all_publish = "SELECT * FROM publishs";
+	String insert_publish = "INSERT INTO publishs(id, namepublish, site, add) VALUES(?,?,?,?)";
+	ArrayList<Publish> publishs = new ArrayList<Publish>();
+	String publishPath;
+	 public PublishServlet() throws FileNotFoundException, IOException {
+	 prop = new ConnectionProperty();
+	 }
+	 
+	protected void doGet(HttpServletRequest request,
+	HttpServletResponse response) 
+	throws ServletException, IOException {
+	response.setContentType("text/html");
+	ConnectionProperty builder = new ConnectionProperty();
+	// Загрузка всех должностей
+	try (Connection conn = builder.getConnection()) {
+	Statement stm = conn.createStatement();
+	ResultSet rss = stm.executeQuery(select_all_publish);
+	if(rss != null) {
+		publishs.clear();
+	while (rss.next()) {
+		publishs.add(new Publish(rss.getLong("id"),
+	rss.getString("namepublish"),
+	rss.getString("site"),
+	rss.getString("add")));
+	}
+	rss.close();
+	request.setAttribute("publishs", publishs);
+	}
+	} catch (Exception e) {
+	System.out.println(e);
+	} 
+	publishPath = request.getServletPath();
+	if("/publishs".equals(publishPath)){
+	request.getRequestDispatcher("/WEB-INF/view/publish.jsp")
+	.forward(request, response);
+	}
+	}
 	
-	public void init() {
-		publishDao = new PublishDao();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getServletPath();
-
-		try {
-			switch (action) {
-			case "/insert":
-				insertUser(request, response);
-				break;
-			case "/delete":
-				deleteUser(request, response);
-				break;
-			case "/update":
-				updateUser(request, response);
-				break;
-			default:
-				listPublish(request, response);
-				break;
+	/**
+	* @see HttpServlet#doPost(HttpServletRequest request, 
+	HttpServletResponse response)
+	*/
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			ConnectionProperty builder = new ConnectionProperty();
+			try (Connection conn = builder.getConnection()){
+			Long id = (long) Integer.parseInt(request.getParameter("id"));
+			String namepublish = request.getParameter("namepublish");
+			String site = request.getParameter("site");
+			String add = request.getParameter("add");
+		
+			try (PreparedStatement preparedStatement = 
+			conn.prepareStatement(insert_publish)){
+			preparedStatement.setLong(1, id);
+			preparedStatement.setString(2, namepublish);
+			preparedStatement.setString(3, site);
+			preparedStatement.setString(4, add);
+			
+			int result = preparedStatement.executeUpdate();
+			} catch (Exception e) {
+			System.out.println(e);
 			}
-		} catch (SQLException ex) {
-			throw new ServletException(ex);
-		}
-	}
-
-	private void listPublish(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<Publish> listPublish = publishDao.selectAllPublish();
-		request.setAttribute("listPublish", listPublish);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/publish.jsp");
-		dispatcher.forward(request, response);
-	}
-
-
-	private void insertUser(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, IOException {
-		String namepublish = request.getParameter("namepublish");
-		String site = request.getParameter("site");
-		String add = request.getParameter("add");
-		
-		Publish newUser = new Publish(null, namepublish, site, add);
-		publishDao.insertUser(newUser);
-		response.sendRedirect("list");
-	}
-
-	private void updateUser(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, IOException {
-		Long id = (long) Integer.parseInt(request.getParameter("id"));
-		String namepublish = request.getParameter("namepublish");
-		String site = request.getParameter("site");
-		String add = request.getParameter("add");
-		
-
-		Publish book = new Publish(id, namepublish, site, add);
-		publishDao.updateUser(book);
-		response.sendRedirect("list");
-	}
-
-	private void deleteUser(HttpServletRequest request, HttpServletResponse response) 
-			throws SQLException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		publishDao.deleteUser(id);
-		response.sendRedirect("list");
-
-	}
+			} catch (Exception e) {
+			System.out.println(e);
+			getServletContext().getRequestDispatcher("/WEB-INF/view/author.jsp")
+			.forward(request, response); 
+			}
+			doGet(request, response);
+			}
 }

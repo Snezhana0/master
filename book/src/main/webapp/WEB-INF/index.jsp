@@ -16,7 +16,7 @@ charset="UTF-8">
 <ul>
 <li><a href="/book/books">Книги</a>
 <li><a href="/book/authors">Авторы</a>
-<li><a href="/book/publishs">Издания</a>
+<li><a href="/book/publishs">Издательства</a>
 </ul>
 </div>
 <jsp:include page="jspf/footer.jsp" />

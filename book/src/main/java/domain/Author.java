@@ -8,18 +8,15 @@ public class Author {
 	protected String lastname;
 	
 	
-	public Author() {
-	}
 	
 	public Author(String firstname, String lastname) {
-		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		
 	}
 
 	public Author(Long id, String firstname, String lastname) {
-		super();
+		
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -45,5 +42,9 @@ public class Author {
 		this.lastname = lastname;
 	}
 	
+	@Override
+	public String toString() {
+		return "Автор "+ id + firstname + lastname ;
+	}
 
 }
