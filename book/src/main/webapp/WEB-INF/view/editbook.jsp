@@ -2,15 +2,14 @@
  pageEncoding="UTF-8"%>
  
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
- 
 <%@ page import="domain.Book"%>
-<%@ page import="domain.Publish"%>
 <%@ page import="domain.Author"%>
+<%@ page import="domain.Publish"%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Книги</title>
+<title>Редактирование данных книги</title>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,8 +36,7 @@
 <th>Наличие</th>
 <th>Автор</th>
 <th>Издательство</th>
-<th scope="col">Редактировать</th>
-<th scope="col">Удалить</th>
+
 </tr>
 </thead>
 <tbody>
@@ -54,14 +52,6 @@
 <td>${book.getStatuc()}</td>
 <td>${book.getAuthor()}</td>
 <td>${book.getPublish()}</td>
-<td width="20"><a
-href='<c:url value="/editbook?id=${book.getId()}" />'
-role="button" class="btn btn-outline-primary"> <img
-alt="Редактировать" src="images/edit.png" height = "30" width = "30"></a></td>
-<td width="20"><a
-href='<c:url value="/deletebook?id=${book.getId()}" />'
-role="button" class="btn btn-outline-primary"> <img
-alt="Удалить" src="images/delete.png" height = "30" width = "30"></a></td>
 </tr>
 </c:forEach>
 </tbody>
@@ -69,83 +59,86 @@ alt="Удалить" src="images/delete.png" height = "30" width = "30"></a></td
 </aside>
 <section>
 <article>
-<h3>Добавить книгу</h3>
+<h3>Редактирование данных </h3>
 <div class="text-article">
 <form method="POST" action="">
 <div class="mb-3 row">
-<label for="id" class="col-sm-3 col-form-label">Id</label>
+<label for="id" class="col-sm-4 col-form-label">Id книги</label>
+<div class="col-sm-7">
+<input type="text" class="form-control" readonly
+value="${booksEdit[0].getId()}" />
+</div>
+</div>
+<div class="mb-3 row">
+<label for="title" class="col-sm-4 col-form-label">Назвние</label>
 <div class="col-sm-7">
 <input type="text" class="form-control" id="staticLastname"
-name="id" />
+name="title" value="${booksEdit[0].getTitle()}"/>
 </div>
 </div>
 <div class="mb-3 row">
-<label for="title" class="col-sm-3 col-form-label">Название</label>
-<div class="col-sm-7">
-<input type="text" class="form-control" id="staticLastname"
-name="title" />
-</div>
-</div>
-<div class="mb-3 row">
-<label for="code" class="col-sm-3 col-form-label">Код</label>
+<label for="code" class="col-sm-4 col-form-label">Код</label>
 <div class="col-sm-7">
 <input type="text" class="form-control" id="staticFirstname"
-name="code" />
+name="code" value="${booksEdit[0].getCode()}"/>
 </div>
 </div>
 <div class="mb-3 row">
-<label for="yearpublish" class="col-sm-3 col-form-label">Год публикации</label>
-<div class="col-sm-7">
-<input type="text" class="form-control" id="staticFirstname"
-name="yearpublish" />
-</div>
-<div class="mb-3 row">
-<label for="countpage" class="col-sm-3 col-form-label">Кол-во страниц</label>
+<label for="yearpublish" class="col-sm-4 col-form-label">Год публикации</label>
 <div class="col-sm-7">
 <input type="text" class="form-control" id="staticphone"
-name="countpage" />
+name="yearpublish" value="${booksEdit[0].getYearpublish()}"/>
 </div>
 </div>
 <div class="mb-3 row">
-<label for="hardcover" class="col-sm-3 col-form-label">Переплёт
+<label for="countpage" class="col-sm-4 col-form-label">Кол-во страниц
 </label>
 <div class="col-sm-7">
 <input type="text" class="form-control" id="staticemail"
-name="hardcover" />
+name="countpage" value="${booksEdit[0].getCountpage()}"/>
 </div>
 </div>
 <div class="mb-3 row">
-<label for="abstract" class="col-sm-3 col-form-label">Реферат
+<label for="hardcover" class="col-sm-4 col-form-label">Переплет</label>
+<div class="col-sm-7">
+<input type="text" class="form-control" id="staticphone"
+name="hardcover" value="${booksEdit[0].getHardcover()}"/>
+</div>
+</div>
+<div class="mb-3 row">
+<label for="abstract" class="col-sm-4 col-form-label">Реферат
 </label>
 <div class="col-sm-7">
 <input type="text" class="form-control" id="staticemail"
-name="abstract" />
+name="abstract" value="${booksEdit[0].getAbstract()}"/>
 </div>
 </div>
 <div class="mb-3 row">
-<label for="statuc" class="col-sm-3 col-form-label">Наличие
+<label for="statuc" class="col-sm-4 col-form-label">Наличие
 </label>
 <div class="col-sm-7">
 <input type="text" class="form-control" id="staticemail"
-name="statuc" />
+name="statuc" value="${booksEdit[0].getStatuc()}"/>
 </div>
 </div>
 <div class="mb-3 row">
-<label for="lastname" class="col-sm-3 col-form-label">Автор</label>
+<label for="authorid" class="col-sm-4 col-form-label">Автор</label>
 <div class="col-sm-7">
-<select name="authors" class="form-control">
-<option>Выберите автора</option>
-<c:forEach var="author" items="${author}">
+<select name="author" class="form-control">
+<option >Выберите автора</option>
+<c:forEach var="author" items="${authors}">
 <option value="${author}">
 <c:out value="${author.getLastName()}"></c:out>
 </option>
 </c:forEach>
 </select>
 </div>
-<label for="namepublish" class="col-sm-3 col-form-label">Издательство</label>
+</div>
+<div class="mb-3 row">
+<label for="publishid" class="col-sm-4 col-form-label">Издательство</label>
 <div class="col-sm-7">
 <select name="publish" class="form-control">
-<option>Выберите издательство</option>
+<option >Выберите издательство</option>
 <c:forEach var="publish" items="${publishs}">
 <option value="${publish}">
 <c:out value="${publish.getNamePublish()}"></c:out>
@@ -153,14 +146,16 @@ name="statuc" />
 </c:forEach>
 </select>
 </div>
+</div>
 <p>
-<button type="submit" class="btn btn-primary">Добавить</button>
+<button type="submit" class="btn btn-primary">Редактировать</button>
+<a href='<c:url value="/books" />' role="button"
+class="btn btn-secondary">Отменить/Возврат</a>
 </p>
 </form>
+</div>
 </article>
 </section>
-</div>
-</div>
 </div>
 <jsp:include page="/WEB-INF/jspf/footer.jsp" />
 </body>

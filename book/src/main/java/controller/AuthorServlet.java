@@ -20,7 +20,7 @@ import domain.Author;
 public class AuthorServlet extends HttpServlet { 
 	private static final long serialVersionUID = 1L;
 	ConnectionProperty prop;
-	String select_all_author = "SELECT * FROM authors";
+	String select_all_author = "SELECT id, firstname, lastname FROM authors";
 	String insert_author = "INSERT INTO authors (id, firstname, lastname) VALUES(?,?,?)";
 	ArrayList<Author> author = new ArrayList<Author>();
 	String userPath;

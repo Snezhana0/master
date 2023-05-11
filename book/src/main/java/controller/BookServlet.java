@@ -29,7 +29,7 @@ public class BookServlet extends HttpServlet {
 	String select_all_publish = "SELECT * FROM publishs";
 	String insert_book = "INSERT INTO books( title, code, yearpublish, countpage, hardcover, abstract, statuc, authorid, publishid, id) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
-	ArrayList<Author> authors = new ArrayList<Author>();
+	ArrayList<Author> author = new ArrayList<Author>();
 	ArrayList<Publish> publishs = new ArrayList<Publish>();
 	ArrayList<Book> books = new ArrayList<Book>();
 	String userPath;
@@ -39,9 +39,9 @@ public class BookServlet extends HttpServlet {
 	 }
 	 
 	 // Поиск должности по id
-	 private Author FindById(Long id, ArrayList<Author> authors) {
-	 if(authors != null) {
-	 for(Author r: authors) {
+	 private Author FindById(Long id, ArrayList<Author> author) {
+	 if(author != null) {
+	 for(Author r: author) {
 	 if((r.getId()).equals(id)) {
 	 return r;
 	 }
@@ -78,14 +78,14 @@ public class BookServlet extends HttpServlet {
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery(select_all_author);
 	if(rs != null) {
-	authors.clear();
+	author.clear();
 	while (rs.next()) {
-	authors.add(new Author(rs.getLong("id"),
+	author.add(new Author(rs.getLong("id"),
 			rs.getString("firstname"),
 			rs.getString("lastname")));
 	}
 	rs.close();
-	request.setAttribute("authors", authors);
+	request.setAttribute("author", author);
 	}
 	else
 	{
@@ -128,7 +128,7 @@ public class BookServlet extends HttpServlet {
 		rs.getString("hardcover"),
 		rs.getString("abstract"),
 		rs.getString("statuc"),
-		FindById(authorId, authors),
+		FindById(authorId, author),
 		FindByIdPublish(publishId, publishs),
 		authorId,
 		publishId));

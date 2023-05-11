@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="4.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="4.0">
   <servlet>
     <description></description>
     <display-name>HomeServlet</display-name>
@@ -48,5 +48,65 @@
   <servlet-mapping>
     <servlet-name>AuthorServlet</servlet-name>
     <url-pattern>/AuthorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditAuthorServlet</display-name>
+    <servlet-name>EditAuthorServlet</servlet-name>
+    <servlet-class>controller.EditAuthorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAuthorServlet</servlet-name>
+    <url-pattern>/EditAuthorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAuthorServlet</display-name>
+    <servlet-name>DeleteAuthorServlet</servlet-name>
+    <servlet-class>controller.DeleteAuthorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAuthorServlet</servlet-name>
+    <url-pattern>/DeleteAuthorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditPublishServlet</display-name>
+    <servlet-name>EditPublishServlet</servlet-name>
+    <servlet-class>controller.EditPublishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPublishServlet</servlet-name>
+    <url-pattern>/EditPublishServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeletePublishServlet</display-name>
+    <servlet-name>DeletePublishServlet</servlet-name>
+    <servlet-class>controller.DeletePublishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePublishServlet</servlet-name>
+    <url-pattern>/DeletePublishServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditBookServlet</display-name>
+    <servlet-name>EditBookServlet</servlet-name>
+    <servlet-class>controller.EditBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditBookServlet</servlet-name>
+    <url-pattern>/EditBookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteBookServlet</display-name>
+    <servlet-name>DeleteBookServlet</servlet-name>
+    <servlet-class>controller.DeleteBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteBookServlet</servlet-name>
+    <url-pattern>/DeleteBookServlet</url-pattern>
   </servlet-mapping>
 </web-app>

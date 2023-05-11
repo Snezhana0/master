@@ -6,10 +6,9 @@ pageEncoding="UTF-8"%>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Авторы</title>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редактирование автора</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -26,8 +25,6 @@ pageEncoding="UTF-8"%>
 <th scope="col">Код</th>
 <th scope="col">Имя</th>
 <th scope="col">Фамилия</th>
-<th scope="col">Редактировать</th>
-<th scope="col">Удалить</th>
 </tr>
 </thead>
 <tbody>
@@ -36,15 +33,6 @@ pageEncoding="UTF-8"%>
 <td>${authors.getId()}</td>
 <td>${authors.getFirstName()}</td>
 <td>${authors.getLastName()}</td>
-<td width="20"><a
-href='<c:url value="/editauthor?id=${authors.getId()}" />'
-role="button" class="btn btn-outline-primary">
-<img alt="Редактировать" src="images/edit.png" height = "30" width = "30"></a>
-</td> <td width="20"><a
-href='<c:url value="/deleteauthor?id=${authors.getId()}"/>'
-role="button" class="btn btn-outline-primary"> <img
-alt="Удалить" src="images/delete.png" height = "30" width = "30"></a></td>
-</tr>
 </c:forEach>
 </tbody>
 </table>
@@ -52,36 +40,39 @@ alt="Удалить" src="images/delete.png" height = "30" width = "30"></a></td
 </section>
 <section>
 <article>
-<h3>Добавить автора</h3>
+<h3>Редактирование автора</h3>
 <div class="text-article">
 <form method="POST" action="">
 <div class="mb-3 row">
-<label for="id"
-class="col-sm-3 col-form-label">Код</label>
+<label for="id" class="col-sm-4 col-form-label">
+Код автора</label>
 <div class="col-sm-6">
-<input type="text" name="id" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" readonly
+value="${authorsEdit[0].getId()}" />
 </div>
 </div>
 <div class="mb-3 row">
 <label for="firstname"
-class="col-sm-3 col-form-label">Имя</label>
+class="col-sm-4 col-form-label">Имя</label>
 <div class="col-sm-6">
-<input type="text" name="firstname" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" name="firstname"
+value="${authorsEdit[0].getFirstName()}" />
 </div>
 </div>
 <div class="mb-3 row">
 <label for="lastname"
-class="col-sm-3 col-form-label">Фамилия</label>
+class="col-sm-4 col-form-label">Фамилия</label>
 <div class="col-sm-6">
-<input type="text" name="lastname" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" name="lastname"
+value="${authorsEdit[0].getLastName()}" />
 </div>
 </div>
 <p>
-<button type="submit" class="btn btn-primary">
-Добавить</button>
+<button type="submit"
+class="btn btn-primary">Редактировать</button>
+<a href='<c:url value="/authors" />'
+role="button"
+class="btn btn-secondary">Отменить/Возврат</a>
 </p>
 </form>
 </div>

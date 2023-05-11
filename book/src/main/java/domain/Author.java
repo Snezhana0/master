@@ -2,17 +2,13 @@ package domain;
   
 
 public class Author {
- 
 	protected Long id;
 	protected String firstname;
 	protected String lastname;
-	
-	
-	
+
 	public Author(String firstname, String lastname) {
 		this.firstname = firstname;
-		this.lastname = lastname;
-		
+		this.lastname = lastname;		
 	}
 
 	public Author(Long id, String firstname, String lastname) {
@@ -20,9 +16,7 @@ public class Author {
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		
 	}
-
 	public Long getId() {
 		return id;
 	}
@@ -41,7 +35,6 @@ public class Author {
 	public void setLastName(String lastname) {
 		this.lastname = lastname;
 	}
-	
 	@Override
 	public String toString() {
 		return "Автор "+ id + firstname + lastname ;

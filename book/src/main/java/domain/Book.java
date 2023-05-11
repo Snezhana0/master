@@ -56,6 +56,21 @@ public class Book {
 	       this.idPublish = idPublish;
 	       }
 	   
+	   public Book(long id, String title, String code, String yearpublish,
+		       String countpage, String hardcover, String Abstract, String statuc, Long idAuthor, Long idPublish) {
+		        this.id = id;
+		       this.title = title;
+		       this.сode = code;
+		       this.yearpublish = yearpublish;
+		       this.countpage = countpage;
+		       this.hardcover = hardcover;
+		       this.Abstract = Abstract;
+		       this.statuc = statuc;
+		  
+		       this.idAuthor = idAuthor;
+		       this.idPublish = idPublish;
+		       }
+	   
 	   public String getTitle() {
 	     return title;
 	    }

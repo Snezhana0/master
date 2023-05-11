@@ -6,10 +6,9 @@ pageEncoding="UTF-8"%>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Издательства</title>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редактирование издательства</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -19,7 +18,7 @@ pageEncoding="UTF-8"%>
 <div id="main">
 <section>
 <aside class="leftAside">
-<h3>Список издательств</h3>
+<h3>Список издательство</h3>
 <table class="table table-sm" id="table-info">
 <thead>
 <tr>
@@ -27,8 +26,6 @@ pageEncoding="UTF-8"%>
 <th scope="col">Название</th>
 <th scope="col">Сайт</th>
 <th scope="col">Адрес</th>
-<th scope="col">Редактировать</th>
-<th scope="col">Удалить</th>
 </tr>
 </thead>
 <tbody>
@@ -38,15 +35,6 @@ pageEncoding="UTF-8"%>
 <td>${publish.getNamePublish()}</td>
 <td>${publish.getSite()}</td>
 <td>${publish.getAdd()}</td>
-<td width="20"><a
-href='<c:url value="/editpublish?id=${publish.getId()}" />'
-role="button" class="btn btn-outline-primary">
-<img alt="Редактировать" src="images/edit.png" height = "30" width = "30"></a>
-</td> <td width="20"><a
-href='<c:url value="/deletepublish?id=${publish.getId()}"/>'
-role="button" class="btn btn-outline-primary"> <img
-alt="Удалить" src="images/delete.png" height = "30" width = "30"></a></td>
-</tr>
 </c:forEach>
 </tbody>
 </table>
@@ -54,44 +42,47 @@ alt="Удалить" src="images/delete.png" height = "30" width = "30"></a></td
 </section>
 <section>
 <article>
-<h3>Добавить издательство</h3>
+<h3>Редактирование издательства</h3>
 <div class="text-article">
 <form method="POST" action="">
 <div class="mb-3 row">
-<label for="id"
-class="col-sm-3 col-form-label">Код</label>
+<label for="id" class="col-sm-4 col-form-label">
+Код автора</label>
 <div class="col-sm-6">
-<input type="text" name="id" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" readonly
+value="${publishsEdit[0].getId()}" />
 </div>
 </div>
 <div class="mb-3 row">
-<label for="firstname"
-class="col-sm-3 col-form-label">Название</label>
+<label for="namepublish"
+class="col-sm-4 col-form-label">Название</label>
 <div class="col-sm-6">
-<input type="text" name="firstname" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" name="namepublish"
+value="${publishsEdit[0].getNamePublish()}" />
 </div>
 </div>
 <div class="mb-3 row">
-<label for="lastname"
-class="col-sm-3 col-form-label">Сайт</label>
+<label for="site"
+class="col-sm-4 col-form-label">Сайт</label>
 <div class="col-sm-6">
-<input type="text" name="lastname" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" name="site"
+value="${publishsEdit[0].getSite()}" />
 </div>
 </div>
 <div class="mb-3 row">
-<label for="lastname"
-class="col-sm-3 col-form-label">Адрес</label>
+<label for="add"
+class="col-sm-4 col-form-label">Адрес</label>
 <div class="col-sm-6">
-<input type="text" name="lastname" class="form-control"
-id="staticRole" />
+<input type="text" class="form-control" name="add"
+value="${publishsEdit[0].getAdd()}" />
 </div>
 </div>
 <p>
-<button type="submit" class="btn btn-primary">
-Добавить</button>
+<button type="submit"
+class="btn btn-primary">Редактировать</button>
+<a href='<c:url value="/publishs" />'
+role="button"
+class="btn btn-secondary">Отменить/Возврат</a>
 </p>
 </form>
 </div>
